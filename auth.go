@@ -71,7 +71,6 @@ type logoutCmd struct {
 
 type saslCmd struct {
 	Start          int    `bson:"saslStart,omitempty"`
-	Continue       int    `bson:"saslContinue,omitempty"`
 	ConversationId int    `bson:"conversationId,omitempty"`
 	Mechanism      string `bson:"mechanism,omitempty"`
 	Payload        []byte
@@ -326,7 +325,6 @@ func (socket *mongoSocket) loginSASL(cred Credential) error {
 
 		cmd = saslCmd{
 			Start:          start,
-			Continue:       1 - start,
 			ConversationId: res.ConversationId,
 			Mechanism:      cred.Mechanism,
 			Payload:        payload,
